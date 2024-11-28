@@ -1,19 +1,22 @@
 function calculateNumber(type, a, b) {
-    const rounded_a = Math.round(a);
-    const rounded_b = Math.round(b);
-    
-    if (type === 'SUM') {
-      return rounded_a + rounded_b;
-    }
-    if (type === 'SUBTRACT') {
-      return rounded_a - rounded_b;
-    }
-    if (type === 'DIVIDE') {
-      if (rounded_b === 0) {
-        return 'Error';
-      }
-      return rounded_a / rounded_b;
-    }
+  const num1 = Number(a);
+  const num2 = Number(b);
+
+  if (Number.isNaN(num1) || Number.isNaN(num2)) {
+    throw TypeError;
   }
   
-  module.exports = calculateNumber;
+  if (type === 'SUM') {
+    return (Math.round(num1) + Math.round(num2));
+  } else if(type === 'SUBTRACT') {
+    return (Math.round(num1) - Math.round(num2));
+  } else if (type === 'DIVIDE') {
+    if (Math.round(num2) === 0) {
+      return ('Error');
+    }
+    return (Math.round(num1) / Math.round(num2));
+  } else {
+    throw TypeError;
+  }
+}
+module.exports = calculateNumber;
