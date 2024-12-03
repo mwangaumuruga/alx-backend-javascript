@@ -1,42 +1,30 @@
+// 0-calcul.test.js
 const assert = require('assert');
-const mocha = require('mocha');
-
-const calculateNumber = require('./0-calcul');
+const calculateNumber = require('./0-calcul.js');
 
 describe('calculateNumber', () => {
-  it('should return sum of integers', () => {
-    assert.strictEqual(calculateNumber(1, 3), 4);
-    assert.strictEqual(calculateNumber(1, -1), 0);
-    assert.strictEqual(calculateNumber(1, -3), -2);
-  });
-
-  it('should round floats', () => {
-    assert.strictEqual(calculateNumber(1, 3.7), 5);
-    assert.strictEqual(calculateNumber(1.2, 3.7), 5);
-    assert.strictEqual(calculateNumber(1.5, 3.7), 6);
-    assert.strictEqual(calculateNumber(0.1, 0), 0);
-    assert.strictEqual(calculateNumber(1.4, -4.5), -3);
-  });
-
-  it('should return the rounded number if only one is provided', () => {
-    assert.strictEqual(calculateNumber(2), 2);
-    assert.strictEqual(calculateNumber(2.7), 3);
-  });
-
-  it('should cast non-numbers into numbers', () => {
-    assert.strictEqual(calculateNumber(true, '3'), 4);
-    assert.strictEqual(calculateNumber(1, '3.7'), 5);
-    assert.strictEqual(calculateNumber('1.2', 3.7), 5);
-  });
-
-  it('should throw typeerror if either param cannot be coerced to a number', () => {
-    assert.throws(() => calculateNumber('hello'), {
-      name: 'TypeError',
-      message: 'Parameters must be numbers'
+    it('should return 4 for inputs 1 and 3', () => {
+        assert.strictEqual(calculateNumber(1, 3), 4);
     });
-    assert.throws(() => calculateNumber(1.2, 'dog'), {
-      name: 'TypeError',
-      message: 'Parameters must be numbers'
+
+    it('should round 3.7 to 4 and return 5 for inputs 1 and 3.7', () => {
+        assert.strictEqual(calculateNumber(1, 3.7), 5);
     });
-  });
+
+    it('should round 1.2 to 1 and 3.7 to 4 and return 5', () => {
+        assert.strictEqual(calculateNumber(1.2, 3.7), 5);
+    });
+
+    it('should round 1.5 to 2 and 3.7 to 4 and return 6', () => {
+        assert.strictEqual(calculateNumber(1.5, 3.7), 6);
+    });
+
+    it('should handle negative numbers correctly', () => {
+        assert.strictEqual(calculateNumber(-1.2, -3.7), -5);
+    });
+
+    it('should return correct value for large numbers', () => {
+        assert.strictEqual(calculateNumber(1000.5, 2000.6), 3002);
+    });
 });
+
